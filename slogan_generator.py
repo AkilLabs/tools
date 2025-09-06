@@ -1,9 +1,15 @@
 import os
 import streamlit as st
 import google.generativeai as genai
+from dotenv import load_dotenv
 
-# Configure the API key for Gemini
-genai.configure(api_key='AIzaSyCadd13-EHegOxuzgVr_17N-HTTJWvlD-k')
+# Load environment variables from .env file
+load_dotenv()
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+if not GOOGLE_API_KEY:
+    st.error("Google API key not found in .env file!")
+else:
+    genai.configure(api_key=GOOGLE_API_KEY)
 
 # Page title and description
 st.title("Slogan Generator")
